@@ -1,5 +1,7 @@
 import re
 
+THRESHOLD = 1000
+
 
 class StringCalculator:
 
@@ -22,7 +24,17 @@ class StringCalculator:
                 else re.split(f"\n|{delimiters}", num_string)
             )
 
-            total = sum(int(num) for num in num_list)
+            total = 0
+            negatives = []
+            for num_str in num_list:
+                num = int(num_str)
+                if num < 0:
+                    negatives.append(num_str)
+                elif num <= THRESHOLD:
+                    total += num
+
+            if negatives:
+                raise Exception(f"""Negatives not allowed: {",".join(negatives)}""")
 
             return total
         except Exception as e:
