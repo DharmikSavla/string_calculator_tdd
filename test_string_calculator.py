@@ -69,6 +69,50 @@ class TestStringCalculator(unittest.TestCase):
 
             self.assertEqual(result, test_case["output"])
 
+    def test_delimiters(self):
+        """
+        Test default and custom delimiters
+        """
+        test_cases = [
+            {"input": "//[**][@]\n4**5@6", "output": 15},
+            {"input": "//;\n1;2", "output": 3},
+            {"input": "//[***]\n1***2***3", "output": 6},
+            {"input": "//[*][%]\n1*2%3,6,7,8,9,1000", "output": 1036},
+        ]
+        for test_case in test_cases:
+            string_calculator = StringCalculator(num_string=test_case["input"])
+            result = string_calculator.add()
+
+            self.assertEqual(result, test_case["output"])
+
+    def test_additional_edge_cases(self):
+        """
+        Test additional edge cases composed of different validations
+        """
+        test_cases = [
+            {
+                "input": "//[*]\n1001*2",  # Delimiter + ignore > 1000
+                "output": 2,
+            },
+            {
+                "input": "//[***][%%][&]\n5***6%%7&8",  # Three multi-character delimiters
+                "output": 26,
+            },
+            {
+                "input": "//[**][%%]\n1**2%%3,4\n5",  # Long delimiters + commas + newlines
+                "output": 15,
+            },
+            {
+                "input": "//[*]\n0*1*2",  # Includes zero
+                "output": 3,
+            },
+        ]
+        for test_case in test_cases:
+            string_calculator = StringCalculator(num_string=test_case["input"])
+            result = string_calculator.add()
+
+            self.assertEqual(result, test_case["output"])
+
 
 if __name__ == "__main__":
     unittest.main()
