@@ -2,7 +2,7 @@
 
 ## Project Overview
 This project showcases TDD (Test Driven Development) by a simple string calculator.
-Test-Driven Development (TDD) is a software development approach where you write tests before writing the code, following a cycle of writing a failing test, writing the code to make it pass, and then refactoring
+Test-Driven Development (TDD) is a software development approach where you write tests before writing the code, following a cycle of writing a failing test, writing the code to make it pass and then refactoring.
 
 ## Features
 
@@ -22,6 +22,8 @@ source venv/bin/activate  # For macOS/Linux
 venv\Scripts\activate     # For Windows
 ```
 
-### Testing
+### 2. Testing
 ```sh
 python -m unittest test_string_calculator.py
+
+*****   Thank You!    *****
